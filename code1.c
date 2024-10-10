@@ -1,16 +1,43 @@
 #include <stdio.h>
-
 #define SIZE 5
+
 int addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
     int added[SIZE][SIZE] = {{0}};
     // Iterate through each matrix
-    for (int i = 0; i < SIZE; i++) {
+    for (int i=0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             added[i][j] = m1[i][j] + m2[i][j]; // Insert sum into each corresponding element of added array
-            printf("%d", added[i][j]);
+            printf("%d ", added[i][j]);
         }
+        printf("\n");
     }
 }
+
+int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
+    int product[SIZE][SIZE] = {{0}};
+    for (int i=0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < SIZE; k++) {
+                product[i][j] += m1[i][k]*m2[k][j];
+            }
+            printf("%d ", product[i][j]);
+        }
+    printf("\n");
+    }
+}
+
+int transposeMatrix(int m1[SIZE][SIZE]) {
+    int transposed[SIZE][SIZE] = {{0}};
+    for (int i=0; i<SIZE; i++) {
+        for (int j=0; j<SIZE; j++) {
+            transposed[i][j] = m1[j][i];
+            printf("%d ", transposed[i][j]);
+        }
+    printf("\n");
+    }
+}
+
+
 int main() {
     // Initialize matrix
     int m1[SIZE][SIZE] = {
@@ -31,4 +58,6 @@ int main() {
     };
 
     addMatrices(m1, m2);
+    multiplyMatrices(m1, m2);
+    transposeMatrix(m1);
 }
