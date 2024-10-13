@@ -1,40 +1,46 @@
 #include <stdio.h>
 #define SIZE 5
+void printMatrix(int m1[SIZE][SIZE]) { // Print matrix in matrix format
+    for (int i=0; i<SIZE; i++) {
+        printf("[");
+        for (int j=0; j<SIZE; j++) {
+            printf("%d ", m1[i][j]);
+        }
+    printf("]\n");
+    }
+}
 
-int addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
+int addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) { // Print sum of two matrices
     int added[SIZE][SIZE] = {{0}};
     // Iterate through each matrix
     for (int i=0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             added[i][j] = m1[i][j] + m2[i][j]; // Insert sum into each corresponding element of added array
-            printf("%d ", added[i][j]);
         }
-        printf("\n");
     }
+    printMatrix(added);
 }
 
-int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) {
+int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]) { // Print two matrices' product
     int product[SIZE][SIZE] = {{0}};
     for (int i=0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < SIZE; k++) {
-                product[i][j] += m1[i][k]*m2[k][j];
+                product[i][j] += m1[i][k]*m2[k][j]; // Add dot product of each row/column pair to corresponding product entry
             }
-            printf("%d ", product[i][j]);
         }
-    printf("\n");
     }
+    printMatrix(product);
 }
 
-int transposeMatrix(int m1[SIZE][SIZE]) {
+int transposeMatrix(int m1[SIZE][SIZE]) { // Print a matrix's transpose
     int transposed[SIZE][SIZE] = {{0}};
     for (int i=0; i<SIZE; i++) {
         for (int j=0; j<SIZE; j++) {
-            transposed[i][j] = m1[j][i];
-            printf("%d ", transposed[i][j]);
+            transposed[i][j] = m1[j][i]; // Flip each element across the diagonal
         }
-    printf("\n");
     }
+    printMatrix(transposed);
 }
 
 
@@ -60,4 +66,5 @@ int main() {
     addMatrices(m1, m2);
     multiplyMatrices(m1, m2);
     transposeMatrix(m1);
+    printMatrix(m1);
 }
