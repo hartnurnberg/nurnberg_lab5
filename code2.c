@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // Given: 12 months of sales figures
 // Monthly sales: display month column and sales column
@@ -121,11 +122,36 @@ void movingAvg(float sales[12], const char *months[12]) {
 
 int main() {
     int n = 12;
-    float sales[12] = {23458.01, 40112.00, 56011.85, 37820.88, 37904.67, 60200.22, 72400.31, 56210.89, 67230.84, 68233.12, 80950.34, 95225.22};
+    float salesTest[12] = {23458.01, 40112.00, 56011.85, 37820.88, 37904.67, 60200.22, 72400.31, 56210.89, 67230.84, 68233.12, 80950.34, 95225.22};
     const char* months[12] = {
         "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December"
         };
+    float sales[12];
+    
+    // Opening file portion borrowed from geeksforgeeks.org:
+    // Defining file pointer and opening the file.
+    FILE *file_ptr;
+    char str[50];
+
+    // Open file in read mode
+    file_ptr = fopen("test.txt", "r");
+
+    if (NULL == file_ptr) {
+        // File was not found or was invalid
+        printf("File can't be opened \n");
+    }
+
+    int i=0;
+    while (fgets(str, 50, file_ptr) != NULL) {
+        str[strcspn(str, "\n")] = '\0'; // Strip line
+        float flt = atof(str); // Convert line to float
+        printf("%s", str);
+        sales[i] = flt;
+        i += 1;
+    }
+
+    fclose(file_ptr);
     
     genSalesReport(sales, months); 
     genSalesSummary(sales, months);
@@ -148,4 +174,6 @@ int main() {
     for (int i=0; i<n; i++) {
         printf("%s: %f\n", months[i], sales[i]);
     }
+
+    return 0;
 }
